@@ -4,12 +4,7 @@ save_path: "output/"
 model:
   backbone: "ReFineNet"
   weights: "https://github.com/fuzailpalnak/building-footprint-segmentation/releases/download/alpha/refine.zip"
-#  "https://github.com/fuzailpalnak/building-footprint-segmentation/releases/download/v0.2.3/DlinkNet.zip"
-#
 data_params:
   resize: [1024, 2048]
-  window_size: 512
-  overlap_step: 256
 polygon_size_filter:
-  max_size: 100000
-  min_size: 100
+  min_size: 200

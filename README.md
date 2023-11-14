@@ -64,7 +64,6 @@ Use ChangeFormer [https://github.com/wgcban/ChangeFormer]  to detect changes in 
 - `configs` - folder with config 
 - `run.sh` - bash script to run the project
 - `main.py` - main script to run the project
-- `requirements.txt` - requirements file
 - `README.md` - readme file
 - `Dockerfile` - docker file
 
@@ -73,4 +72,3 @@ Use ChangeFormer [https://github.com/wgcban/ChangeFormer]  to detect changes in 
 bash run.sh
 python3 main.py --config path-to-config
 ```
-

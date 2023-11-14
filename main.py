@@ -11,7 +11,7 @@ import sys
 def run(image_path: str, config: dict, save_path: Path, device: str = "cpu") -> None:
     image = load_img(config["path_to_data"] + image_path)
     seg_mask = get_mask(image, config["model"], config["data_params"], device)
-    polygons = mask_to_polygon(seg_mask)
+    polygons = mask_to_polygon(seg_mask, config["min_area"])
     save_geojson(polygons,  (save_path / image_path).with_suffix(".geojson"))
     draw_polylines(image, polygons, str(save_path / image_path))
 
