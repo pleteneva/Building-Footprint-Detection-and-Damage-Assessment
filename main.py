@@ -1,10 +1,10 @@
 import os
+import torch
 from pathlib import Path
-from forward import *
-from mask2polygon import mask_to_polygon
-from save import save_geojson
-from utils import load_img, draw_polylines
-from parse_args import parse_args
+from scr.get_segmask import get_mask
+from scr.mask2polygon import mask_to_polygon
+from scr.save import save_geojson
+from scr.utils import load_img, draw_polylines, parse_args
 import sys
 
 
