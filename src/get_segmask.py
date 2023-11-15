@@ -3,7 +3,7 @@ import torch
 import numpy as np
 from building_footprint_segmentation.helpers.normalizer import min_max_image_net
 from building_footprint_segmentation.utils.py_network import to_input_image_tensor
-from model import load_model
+from src.model import load_model
 from image_fragment.fragment import ImageFragment
 
 
@@ -27,7 +27,7 @@ def get_mask(image: np.array,
     for fragment in image_fragment:
         fragmented_image = fragment.get_fragment_data(input_image)
         img = min_max_image_net(img = fragmented_image)
-        tensor_image = to_input_image_tensor(img).unsqueeze(0)
+        tensor_image = to_input_image_tensor(img).unsqueeze(0).to(device)
         with torch.no_grad():
             prediction = model(tensor_image)
             prediction = prediction.sigmoid()[0, 0, :, :].detach().cpu().numpy()

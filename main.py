@@ -6,12 +6,14 @@ from src.mask2polygon import mask_to_polygon
 from src.save import save_geojson
 from src.utils import load_img, draw_polylines, parse_args
 import sys
+import warnings
+warnings.filterwarnings("ignore")
 
 
 def run(image_path: str, config: dict, save_path: Path, device: str = "cpu") -> None:
     image = load_img(config["path_to_data"] + image_path)
     seg_mask = get_mask(image, config["model"], config["data_params"], device)
-    polygons = mask_to_polygon(seg_mask, config["min_area"])
+    polygons = mask_to_polygon(seg_mask, config["polygon_size_filter"]["min_size"])
     save_geojson(polygons,  (save_path / image_path).with_suffix(".geojson"))
     draw_polylines(image, polygons, str(save_path / image_path))
 

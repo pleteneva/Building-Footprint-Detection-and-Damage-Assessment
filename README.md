@@ -1,60 +1,55 @@
 ## Tast
-Detect buildings and assess damage from satellite images after natural disasters.
+Detect buildings footprint and assess damage from satellite images after natural disasters.
 
 
 ## Approach
 
 ### Building footprint detection
-1. To detect buildings in satellite images experimented with pretrained segmentation models:
-    - Building_footprint_segmentation library 
-        [https://github.com/fuzailpalnak/building-footprint-segmentation]
-      - Datasets: 
-        - Massachusetts Buildings Dataset
-        - Inria Aerial Image Labeling Dataset
-    - SegFormer b4 city satellite segmentation
-        [https://huggingface.co/ratnaonline1/segFormer-b4-city-satellite-segmentation-1024x1024]
-   
-   ReFineNet segmentation model from Building_footprint_segmentation library was chosen because it has better results on test dataset. 
-    The model was pretrained on Inria Aerial Image Labeling Dataset
+Experimenting with pretrained segmentation models to detect buildings in satellite images, the following approaches 
+were explored:\
+    - Building_footprint_segmentation library ([GitHub](https://github.com/fuzailpalnak/building-footprint-segmentation)), datasets: Massachusetts Buildings Dataset, Inria Aerial Image Labeling Dataset\
+    - SegFormer b4 city satellite segmentation from HuggingFace ([HuggingFace Model Hub](https://huggingface.co/ratnaonline1/segFormer-b4-city-satellite-segmentation-1024x1024))\
+   After evaluation, the ReFineNet segmentation model from the Building_footprint_segmentation library 
+was selected due to its better performance on the test dataset. This model was pretrained on the 
+Inria Aerial Image Labeling Dataset.
 
-Next step:
-Fine-tune pretrained segmentation models on the datasets with building footprints, such as:
-    - SpaceNet
-    - xView
-    - OpenStreetMap
-    - Bonai [https://github.com/jwwangchn/bonai]
-    - Microsoft Building Footprints [https://www.microsoft.com/en-us/maps/bing-maps/building-footprints]
-    - Open Cities AI Challenge [https://www.drivendata.org/competitions/60/building-segmentation-disaster-resilience/]
-Add classes: car and aircraft:
-Potential datasets: xView and Kaggle datasets:
-Limitations - only bboxes - so need to convert bboxes to segmentation masks or use object detection models.
-To detect buildings in satellite images experiment with pretrained object detection models: YOLOv8 nano as baseline
-Add crops different sizes to train dataset to improve model performance on small buildings.
-Add pyramids to train dataset to improve model performance on different scales.
+#### Next Steps:
+Improve model using additional data:\
+To enhance the model's performance, the next step would involve fine-tuning on datasets featuring building footprints, 
+including but not limited to:\
+    - SpaceNet\
+    - xView\
+    - OpenStreetMap\
+    - Bonai [GitHub](https://github.com/jwwangchn/bonai)\
+    - Microsoft Building Footprints [Microsoft BF](https://www.microsoft.com/en-us/maps/bing-maps/building-footprints)\
+    - Open Cities AI Challenge [DrivenData](https://www.drivendata.org/competitions/60/building-segmentation-disaster-resilience/)\
+Additionally, introduce new categories: car and aircraft, utilizing xView and Kaggle datasets 
+as potential sources [Planes in Satellite Imagery](https://www.kaggle.com/datasets/aceofspades914/cgi-planes-in-satellite-imagery-w-bboxes/data), 
+[Planes in Satellite Imagery](https://www.kaggle.com/datasets/rhammell/planesnet/code), 
+[Spatial Vehicle Detection](https://www.kaggle.com/datasets/sadhliroomyprime/spatial-vehicle-detection). Keep in mind the limitation of having only bounding boxes; 
+a workaround involves converting these boxes into segmentation masks or employing object detection models.
+For the identification of buildings in satellite images, conduct experiments using pretrained object detection models, 
+with YOLOv8 nano serving as the baseline.
 
+Improve quality during training:
+- Enhance the training dataset by adding crops of various sizes to improve the model's effectiveness in 
+detecting small buildings. 
+- Add pyramid to improve model performance on different scales.
 
 
 ### Damage assessment
-xView2 dataset [https://xview2.org/dataset]  provided pairs of images pre-disaster and post-disaster 
-was labeled with a degree of damage that occurred to it during the disaster, scaled from 1 to 4
-(no-damage, minor-damage, major-damage, destroyed)
 The approach is localization of buildings and then classification of damage degree for each building.
-As models can be used from repositories:
-1. Fully convolutional Siamese neural networks for buildings damage assessment from satellite images
-[https://github.com/bloodaxe/xview2-solution ]
-[https://paperswithcode.com/paper/fully-convolutional-siamese-neural-networks]
-2. [https://github.com/DIUx-xView/xView2_baseline]
+To classify the damage degree, the xView2 dataset can be used. 
+This dataset [xView](https://xview2.org/dataset), includes pairs of images captured before and after a disaster. 
+Each image is labeled with the degree of damage it incurred during the disaster, categorized on a scale from 1 to 4, 
+indicating no damage, minor damage, major damage, or complete destruction.
+As models can be used from repositories as is:
+- Fully convolutional Siamese neural networks for buildings damage assessment from satellite images:
+  - [GitHub](https://github.com/bloodaxe/xview2-solution), [PapersWithCode](https://paperswithcode.com/paper/fully-convolutional-siamese-neural-networks)
+- xView2 baseline [GitHub](https://github.com/DIUx-xView/xView2_baseline)
 
-
-
-
-
-## Future approaches
-### Building footprint detection
-1. 
-### Damage assessment
-Use ChangeFormer [https://github.com/wgcban/ChangeFormer]  to detect changes in buildings before and after disaster.
-
+To improve quality, the following model can be used:
+- ChangeFormer [GitHub](https://github.com/wgcban/ChangeForm)  to detect changes in buildings before and after disaster.
 
 
 ## Project structure
@@ -67,7 +62,7 @@ Use ChangeFormer [https://github.com/wgcban/ChangeFormer]  to detect changes in 
 - `README.md` - readme file
 - `Dockerfile` - docker file
 
-## Run prediction
+## Run prediction for detect buildings footprint
 ```
 bash run.sh
 python3 main.py --config path-to-config
