@@ -29,7 +29,7 @@ as potential sources [Planes in Satellite Imagery](https://www.kaggle.com/datase
 [Spatial Vehicle Detection](https://www.kaggle.com/datasets/sadhliroomyprime/spatial-vehicle-detection). Keep in mind the limitation of having only bounding boxes; 
 a workaround involves converting these boxes into segmentation masks or employing object detection models.
 For the identification of buildings in satellite images, conduct experiments using pretrained object detection models, 
-with YOLOv8 nano serving as the baseline.
+with YOLOv8 nano or segmentation model HRNet serving as the baseline.
 
 Improve quality during training:
 - Enhance the training dataset by adding crops of various sizes to improve the model's effectiveness in 
@@ -49,7 +49,8 @@ As models can be used from repositories as is:
 - xView2 baseline [GitHub](https://github.com/DIUx-xView/xView2_baseline)
 
 To improve quality, the following model can be used:
-- ChangeFormer [GitHub](https://github.com/wgcban/ChangeForm)  to detect changes in buildings before and after disaster.
+- ChangeFormer [GitHub](https://github.com/wgcban/ChangeForm)  to detect changes in buildings before and after disaster, and classify damage degree 
+afterward.
 
 
 ## Project structure
